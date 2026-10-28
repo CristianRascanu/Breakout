@@ -16,6 +16,7 @@ public:
     GameManager(sf::RenderWindow* window);
     void initialize();
     void update(float dt);
+    void handleEvent(const sf::Event& event);
     void loseLife();
     void render();
     void levelComplete();

@@ -15,6 +15,8 @@ public:
     void setVelocity(float coeff, float duration);
     void setFireBall(float duration);
 	void SetSuperBall(float duration);
+    void setMagnetPaddle(float duration);
+	void launchFromPaddle();
 
 private:
     sf::CircleShape _sprite;
@@ -27,6 +29,11 @@ private:
     bool _isSuperBall;
 	float _superBallTimer =0.0f;
     float _trailTimer = 0.0f;
+
+    bool _isMagnetActive = false;
+    bool _isCaughtByPaddle = false;
+
+    float _magnetTimer = 0.0f;
 
     GameManager* _gameManager;  // Reference to the GameManager
 

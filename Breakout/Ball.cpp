@@ -46,6 +46,18 @@ void Ball::update(float dt)
 		}
     }
 
+	if (_isCaughtByPaddle)
+	{
+        auto paddleBounds = _gameManager->getPaddle()->getBounds();
+        _sprite.setPosition(paddleBounds.left + paddleBounds.width / 2.0f - RADIUS, paddleBounds.top - 2.0f * RADIUS);
+
+		_magnetTimer -= dt;
+		if (_magnetTimer <= 0.0f)
+		{
+			setMagnetPaddle(0.0f); // Disable magnet effect
+		}
+	}
+
     // Fireball effect
     if (_isFireBall)
     {
@@ -91,6 +103,10 @@ void Ball::update(float dt)
     // collision with paddle
     if (_sprite.getGlobalBounds().intersects(_gameManager->getPaddle()->getBounds()))
     {
+        if (_isMagnetActive) {
+            _isCaughtByPaddle = true;
+            return;
+        }
         _direction.y *= -1; // Bounce vertically
 
         float paddlePositionProportion = (_sprite.getPosition().x - _gameManager->getPaddle()->getBounds().left) / _gameManager->getPaddle()->getBounds().width;
@@ -155,4 +171,24 @@ void Ball::SetSuperBall(float duration)
     }
     _isSuperBall = false;
     _superBallTimer = 0.0f;
+}
+
+void Ball::setMagnetPaddle(float duration)
+{
+    if (duration)
+    {
+        _isMagnetActive = true;
+        _magnetTimer = duration;
+        return;
+    }
+    _isMagnetActive = false;
+    _magnetTimer = 0.0f;
+}
+void Ball::launchFromPaddle()
+{
+	if (_isCaughtByPaddle)
+	{
+		_isCaughtByPaddle = false;
+		_direction = { 1, -1 }; // Launch upwards
+	}
 }

@@ -90,6 +90,14 @@ void GameManager::update(float dt)
     _powerupManager->update(dt);
 }
 
+void GameManager::handleEvent(const sf::Event& event)
+{
+	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space)
+	{
+		_ball->launchFromPaddle();
+	}
+}
+
 void GameManager::loseLife()
 {
     _lives--;

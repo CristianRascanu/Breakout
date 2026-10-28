@@ -9,6 +9,7 @@ enum POWERUPS
     slowBall,
     fireBall,
     superBall,
+    magnetPaddle,
     none
 };
 
