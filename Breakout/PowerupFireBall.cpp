@@ -16,9 +16,6 @@ PowerupFireBall::~PowerupFireBall()
     {
         // use my pointer to do things.
     }
-
-
-    
 }
 
 std::pair<POWERUPS, float> PowerupFireBall::applyEffect()

@@ -8,6 +8,7 @@ enum POWERUPS
     fastBall,
     slowBall,
     fireBall,
+    superBall,
     none
 };
 
@@ -49,5 +50,9 @@ constexpr int INITIAL_LIVES = 3;
 const sf::Color ballEffectsColour = sf::Color(100, 100, 200, 255); // blue-ish?
 const sf::Color paddleEffectsColour = sf::Color(255, 250, 205); // lemon chiffon -- very fancy.
 const sf::Color extraBallEffectsColour = sf::Color(41, 110, 1); // metallic green
+
+const float ballTrailLifetime = 0.35f;
+const float brickBurstLifeTime = 0.55f;
+const float paddleBurstLifetime = 0.25f;
 
 

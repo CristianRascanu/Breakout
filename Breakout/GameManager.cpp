@@ -83,6 +83,7 @@ void GameManager::update(float dt)
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) _paddle->moveLeft(dt);
     else _paddle->moveWithMouse(dt);
 
+    _particleSystem.update(dt);
     // update everything 
     _paddle->update(dt);
     _ball->update(dt);
@@ -98,10 +99,13 @@ void GameManager::loseLife()
 }
 
 void GameManager::render()
-{
+{;
+    _brickManager->render();
+
+    _particleSystem.draw(*_window);
     _paddle->render();
     _ball->render();
-    _brickManager->render();
+    
     _powerupManager->render();
     _window->draw(_masterText);
     _ui->render();

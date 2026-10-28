@@ -39,7 +39,7 @@ int BrickManager::checkCollision(sf::CircleShape& ball, sf::Vector2f& direction)
         sf::Vector2f ballPosition = ball.getPosition();
         float ballY = ballPosition.y + 0.5f * ball.getGlobalBounds().height;
         sf::FloatRect brickBounds = brick.getBounds();
-
+        sf::Vector2f brickPosition(brickBounds.left + brickBounds.width /2.0f, brickBounds.top + brickBounds.height /2.0f);
         // default vertical bounce (collision is top/bottom)
         collisionResponse = 2;
         if (ballY > brickBounds.top && ballY < brickBounds.top + brickBounds.height)
@@ -48,6 +48,7 @@ int BrickManager::checkCollision(sf::CircleShape& ball, sf::Vector2f& direction)
 
         // Mark the brick as destroyed (for simplicity, let's just remove it from rendering)
         // In a complete implementation, you would set an _isDestroyed flag or remove it from the vector
+        _gameManager->getParticleSystem().emit(brickPosition, ballEffectsColour, 16, brickBurstLifeTime);
         brick = _bricks.back();
         _bricks.pop_back();
         break;

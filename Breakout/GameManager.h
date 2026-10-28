@@ -6,6 +6,7 @@
 #include "BrickManager.h"
 #include "PowerupManager.h"
 #include "MessagingSystem.h"
+#include "Particles.h"
 #include "UI.h"
 
 
@@ -25,6 +26,7 @@ public:
     PowerupManager* getPowerupManager() const;
     sf::RenderWindow* getWindow() const;
     UI* getUI() const;
+	ParticleSystem& getParticleSystem() { return _particleSystem; }
 
 
 private:
@@ -46,6 +48,7 @@ private:
     PowerupManager* _powerupManager;
     MessagingSystem* _messagingSystem;
     UI* _ui;
+	ParticleSystem _particleSystem;
 
     static constexpr float PAUSE_TIME_BUFFER = 0.5f;
     static constexpr float POWERUP_FREQUENCY = 7.5f;    // time between minimum powerup spawn
