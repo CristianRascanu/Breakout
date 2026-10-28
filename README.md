@@ -5,6 +5,7 @@ W Kavanagh & N Merchant. Summer 2024 (last maintained, Oct 26)
 ## Controls
 
 A/D to move the paddle right and left.
+Space to launch ball when magnetic powerup is active
 P to pause.
 
 ## Powerups
@@ -31,8 +32,9 @@ You are to spend between three and eight hours improving this simple Breakout im
 * Implement commentary with calls to an LLM such as Ollama
 
 # Time Details and Changelist
-_TO DO_
-
+Implemented mouse input for paddle : 00:15:16 time taken
+Implemented particle effects for the ball and collisions with the brick and paddle : 01::43::21 time taken
+Implemented a magnetic paddle powerup : 02:01:59 time taken
 <Add information to this section about the time you've taken for this task along with a professional changelist.>
 
 ---
