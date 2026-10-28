@@ -16,6 +16,7 @@ Paddle::~Paddle()
 void Paddle::moveLeft(float dt)
 {
     float position = _sprite.getPosition().x;
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(*_window);
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && position > 0)
     {
@@ -32,6 +33,40 @@ void Paddle::moveRight(float dt)
         _sprite.move(sf::Vector2f(dt * PADDLE_SPEED, 0));
     }
 }
+
+//Moves the paddle with the mouse.
+void Paddle::moveWithMouse(float dt) {
+
+    // Get the current mouse position relative to the window.
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(*_window);
+	float windowWidth = static_cast<float>(_window->getSize().x);
+    float paddleWidth = _width;
+
+    // Limits the paddle to stay within the window boundaries
+    if(windowWidth <= paddleWidth){
+        _sprite.setPosition(0.f, _sprite.getPosition().y);
+    }
+    float x = static_cast<float>(mousePosition.x) - _width / 2.0f;
+
+    // Clamp the x position to ensure the paddle stays withing the boundaries of the window
+    x = std::max(0.f, std::min(x, windowWidth - paddleWidth));
+
+    float currentX = _sprite.getPosition().x;
+    float positionDifference = x - currentX;
+    float movement = PADDLE_SPEED * dt;
+
+    // Move the paddle towards the target position.
+    if(std::abs(positionDifference) < movement) {
+        currentX = x;
+    } else {
+        currentX += (positionDifference > 0 ? movement : -movement);
+    }
+
+	currentX = std::max(0.f, std::min(currentX, windowWidth - paddleWidth));
+
+    _sprite.setPosition(currentX, _sprite.getPosition().y);
+}
+
 
 void Paddle::update(float dt)
 {
